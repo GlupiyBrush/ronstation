@@ -235,6 +235,16 @@
     inHandsFillBaseName: -fill-
 
 - type: entity
+  name: debug beaker
+  parent: Beaker
+  description: Used to contain a moderate amount of chemicals and solutions.
+  id: BeakerDebug
+  components:
+  - type: AtmosDevice
+  - type: SolutionSorption
+    sorptionRate: 1
+
+- type: entity
   suffix: cryoxadone
   parent: Beaker
   id: CryoxadoneBeakerSmall
