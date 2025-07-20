@@ -1,0 +1,33 @@
+- type: entity
+  parent: VendingMachineWallmount
+  id: VendingMachineWallVendomat
+  name: Vendomat compact
+  description: "Only the finest robust equipment in space! Now on the walls!"
+  components:
+  - type: VendingMachine
+    pack: VendomatInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: Advertise
+    pack: VendomatAds
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Ronstation\Structures\Machines\WallMountedVendingMachines\wallomat.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#ffffff"
+
+
