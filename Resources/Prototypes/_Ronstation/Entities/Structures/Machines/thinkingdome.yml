@@ -1,0 +1,91 @@
+- type: entity
+  id: ThinkingDome
+  parent: BaseMachinePowered
+  name: thinking dome
+  description: The perfect place to unwind with some quiet disco music.
+  components:
+  - type: ThinkingDome
+    thinkingSound:
+      path: /Audio/_Ronstation/ThinkingDome/musicloop.ogg
+      params:
+        loop: true
+        maxDistance: 2
+  - type: Sprite
+    sprite: _Ronstation/Structures/Machines/thinkingdome.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: panel
+      visible: false
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        enum.StorageVisualLayers.Door:
+          True: { visible: false }
+          False: { visible: true }
+      enum.WiresVisuals.MaintenancePanelState:
+        enum.WiresVisualLayers.MaintenancePanel:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_board
+    - machine_parts
+    - entity_storage
+  - type: ResearchClient
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: EmptyOnMachineDeconstruct
+    containers:
+     - entity_storage
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: FatExtractorMachineCircuitboard
+  - type: WiresPanel
+  - type: Appearance
+  - type: StaticPrice
+    price: 1000
+  - type: ResistLocker
+  - type: EntityStorage
+    capacity: 1
+    airtight: false
+  - type: PointLight
+    radius: 1.8
+    energy: 14
+    color: "#ffffff"
+    mask: /Textures/_Ronstation/Effects/LightMasks/disco.png
+  - type: RotatingLight
+    speed: 90
+  - type: RgbLightController
+    cycleRate: 0.075
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      entity_storage: !type:Container
