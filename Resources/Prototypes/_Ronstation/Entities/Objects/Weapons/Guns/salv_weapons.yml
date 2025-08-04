@@ -1,0 +1,182 @@
+- type: entity
+  name: intruder
+  parent: [BaseWeaponPistol, BaseSecurityCargoContraband]
+  id: WeaponPistolIntruder
+  description: An old pistol used primarily in the military and planetary operations. Hated by many because of its complex design. Feeds from .35 pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Objects/Weapons/Guns/Pistols/intruder.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Ronstation/Objects/Weapons/Guns/Pistols/intruder.rsi
+  - type: Gun
+    minAngle: 1
+    maxAngle: 16
+    angleIncrease: 7
+    angleDecay: 9
+    fireRate: 4
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+
+- type: entity
+  name: spitter
+  parent: [BaseWeaponSubMachineGun, BaseSecurityCargoContraband]
+  id: WeaponSubMachineGunSpitter
+  description: SMG that remained after the early earth wars. The manufacturer has long been lost. It has a high spread, which is why it is not suitable for long-range battles. Feeds from .35 SMG magazines.
+  components:
+    - type: Sprite
+      sprite: _Ronstation/Objects/Weapons/Guns/SMGs/spitter.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _Ronstation/Objects/Weapons/Guns/SMGs/spitter.rsi
+    - type: Wieldable
+      unwieldOnUse: false
+    - type: GunWieldBonus
+      minAngle: -18
+      maxAngle: -16
+    - type: Gun
+      minAngle: 23
+      maxAngle: 45
+      fireRate: 7
+      angleIncrease: 5
+      angleDecay: 14
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
+      selectedMode: FullAuto
+      availableModes:
+      - FullAuto
+      - SemiAuto
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazinePistolSubMachineGun
+          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazinePistolSubMachineGun
+          whitelistFailPopup: gun-magazine-whitelist-fail
+        gun_chamber:
+          name: Chamber
+          startingItem: CartridgePistol
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgePistol
+    - type: MagazineVisuals
+      magState: mag
+      steps: 8
+      zeroVisible: true
+    - type: Appearance
+
+- type: entity
+  name: repeater
+  parent: [BaseWeaponRifle, BaseSecurityCargoContraband]
+  id: WeaponRifleRepeater
+  description: An old but reliable assault rifle. Still used in planetary operations throughout space. Uses .20 rifle ammo.
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Objects/Weapons/Guns/Rifles/repeater.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Ronstation/Objects/Weapons/Guns/Rifles/repeater.rsi
+  - type: GunWieldBonus
+    minAngle: -24
+    maxAngle: -22
+  - type: Gun
+    fireRate: 4.5
+    minAngle: 30
+    maxAngle: 43
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 7
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  name: ravager
+  parent: [BaseWeaponRevolver, BaseGunWieldable, BaseSecurityCargoContraband]
+  id: WeaponShotgunRavager
+  description: A single-action revolver manufactured by various companies. It is readily available on the civilian market, making it a popular choice among private investigators. You feel lucky just holding it. Loads 6 rounds of .45 magnum.
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Appearance
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - ShellShotgun
+    proto: ShellShotgun
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+    soundEject:
+      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
+  - type: MagazineVisuals
+    magState: mag
+    steps: 7
+    zeroVisible: true
+  - type: Sprite
+    sprite: _Ronstation/Objects/Weapons/Guns/Shotguns/ravager.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Ronstation/Objects/Weapons/Guns/Shotguns/ravager.rsi

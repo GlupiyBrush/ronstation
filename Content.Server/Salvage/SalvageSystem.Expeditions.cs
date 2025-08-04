@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using Content.Server.Salvage.Expeditions;
@@ -21,7 +22,8 @@ public sealed partial class SalvageSystem
      * Handles setup / teardown of salvage expeditions.
      */
 
-    private const int MissionLimit = 3;
+    private const int MissionLimit = 5;
+    private static readonly ImmutableArray<string> Difficulties = ["Easy", "Normal", "Moderate", "Hard", "Extreme"];
 
     private readonly JobQueue _salvageQueue = new();
     private readonly List<(SpawnSalvageMissionJob Job, CancellationTokenSource CancelToken)> _salvageJobs = new();
@@ -154,7 +156,7 @@ public sealed partial class SalvageSystem
             {
                 Index = component.NextIndex,
                 Seed = _random.Next(),
-                Difficulty = "Moderate",
+                Difficulty = Difficulties[i],
             };
 
             component.Missions[component.NextIndex++] = mission;

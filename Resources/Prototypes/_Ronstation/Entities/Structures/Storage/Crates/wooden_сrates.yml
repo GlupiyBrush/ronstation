@@ -1,0 +1,163 @@
+- type: entity
+  parent: BaseStructure
+  id: BaseCrateWoodenLocked
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  abstract: true
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Ronstation/Structures/Storage/Crates/wooden_crate.rsi
+    state: base
+    noRot: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - CrateMask #this is so they can go under plastic flaps
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageModifierSet: Wood
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank1:
+            min: 3
+            max: 7
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+  - type: AtmosExposed
+  - type: Construction
+    graph: PryOpenWoodenCrate
+    node: pryOpen
+    containers:
+    - entity_storage
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenLocked
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Structures/Storage/Crates/wooden_crate.rsi
+    state: base
+    noRot: true
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenOpen
+  description: A large wooden box. Someone has already opened it.
+  name: wooden crate
+  components:
+  - type: Sprite
+    sprite: _Ronstation/Structures/Storage/Crates/wooden_crate.rsi
+    state: open
+    noRot: true
+  - type: Construction
+    graph: DisassembleWoodenCrate
+    node: disassemble
+
+# I tried, moth fans, i tried.
+#- type: entity
+#  parent: BaseCrateWoodenLocked
+#  id: CrateWoodenLockedMothroaches
+#  description: A large wooden box. You can pry open its lid with a crowbar.
+#  name: wooden crate
+#  suffix: Mothroaches
+#  components:
+#  - type: EntityTableContainerFill
+#    containers:
+#      entity_storage: !type:AllSelector
+#        children:
+#        - id: MothroachCube
+#          amount: !type:ConstantNumberSelector
+#            value: 8
+#        - id: ExtinguisherSpray
+#  - type: Sprite
+#    sprite: _Ronstation/Structures/Storage/Crates/wooden_crate.rsi
+#    state: base
+#    noRot: true
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenLockedIntruder
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  suffix: Filled, Intruder
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MagazinePistol
+          amount: !type:ConstantNumberSelector
+            value: 2
+        - id: MagazinePistolPractice
+        - id: WeaponPistolIntruder
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenLockedSpitter
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  suffix: Filled, Spitter
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MagazinePistolSubMachineGun
+          amount: !type:ConstantNumberSelector
+            value: 2
+        - id: MagazinePistolSubMachineGunPractice
+        - id: WeaponSubMachineGunSpitter
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenLockedRepeater
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  suffix: Filled, Repeater
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: MagazineRifle
+          amount: !type:ConstantNumberSelector
+            value: 2
+        - id: MagazineRiflePractice
+        - id: WeaponRifleRepeater
+
+- type: entity
+  parent: BaseCrateWoodenLocked
+  id: CrateWoodenLockedRavager
+  description: A large wooden box. You can pry open its lid with a crowbar.
+  name: wooden crate
+  suffix: Filled, Ravager
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BoxLethalshot
+        - id: WeaponShotgunRavager

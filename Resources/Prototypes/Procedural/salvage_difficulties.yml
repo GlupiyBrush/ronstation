@@ -1,12 +1,39 @@
 - type: salvageDifficulty
-  id: Moderate
+  id: Easy
+  lootBudget: 20
+  mobBudget: 15
+  modifierBudget: 1
+  color: "#5EC2EB96"
+  recommendedPlayers: 1
+
+- type: salvageDifficulty
+  id: Normal
   lootBudget: 30
-  mobBudget: 25
-  modifierBudget: 2
-  color: "#52B4E996"
+  mobBudget: 20
+  modifierBudget: 1
+  color: "#80F06C96"
   recommendedPlayers: 2
 
-    #9FED5896
-    #EFB34196
-    #DE3A3A96
-    #D381C996
+- type: salvageDifficulty
+  id: Moderate
+  lootBudget: 45
+  mobBudget: 25
+  modifierBudget: 2
+  color: "#F0CD6C96"
+  recommendedPlayers: 2
+
+- type: salvageDifficulty
+  id: Hard
+  lootBudget: 60
+  mobBudget: 35
+  modifierBudget: 3
+  color: "#ED454596"
+  recommendedPlayers: 4
+
+- type: salvageDifficulty
+  id: Extreme
+  lootBudget: 90
+  mobBudget: 50
+  modifierBudget: 4
+  color: "#EC6CF096"
+  recommendedPlayers: 99

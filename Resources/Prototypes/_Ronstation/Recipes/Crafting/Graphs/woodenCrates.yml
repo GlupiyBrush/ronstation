@@ -1,0 +1,31 @@
+- type: constructionGraph
+  id: PryOpenWoodenCrate
+  start: pryOpen
+  graph:
+    - node: pryOpen
+      edges:
+        - to: start
+          steps:
+            - tool: Prying
+              doAfter: 2.5
+          completed:
+            - !type:SpawnPrototype
+              prototype: CrateWoodenOpen
+            - !type:EmptyAllContainers
+            - !type:DeleteEntity
+
+- type: constructionGraph
+  id: DisassembleWoodenCrate
+  start: disassemble
+  graph:
+    - node: disassemble
+      edges:
+        - to: start
+          steps:
+            - tool: Prying
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: MaterialWoodPlank1
+              amount: 5
+            - !type:DeleteEntity

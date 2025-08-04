@@ -101,7 +101,8 @@ public sealed record SalvageMission(
     float Temperature,
     Color? Color,
     TimeSpan Duration,
-    List<string> Modifiers)
+    List<string> Modifiers,
+    string Difficulty)
 {
     /// <summary>
     /// Seed used for the mission.
@@ -147,6 +148,12 @@ public sealed record SalvageMission(
     /// Modifiers (outside of the above) applied to the mission.
     /// </summary>
     public List<string> Modifiers = Modifiers;
+
+
+    /// <summary>
+    /// Mission difficulty. Duh.
+    /// </summary>
+    public readonly string Difficulty = Difficulty;
 }
 
 [Serializable, NetSerializable]
